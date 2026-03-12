@@ -72,10 +72,5 @@ JOIN matriculas m ON a.id_aluno = m.id_aluno
 JOIN cursos c ON c.id_curso = m.id_curso;
 
 
--- ATIVIDADE DA AULA --
-
-SELECT * FROM alunos 
-a.nome AS 'nome do aluno', 
-c.nome_curso AS 'curso', 
 
 
