@@ -73,4 +73,19 @@ JOIN cursos c ON c.id_curso = m.id_curso;
 
 
 
+-- Atividade 
+
+SELECT 
+    a.nome AS "Nome do Aluno",
+    c.nome_curso AS "Nome do Curso",
+    FLOOR(DATEDIFF(CURDATE(), a.data_nascimento) / 365.25) AS "Idade do Aluno",
+    DATE_FORMAT(m.data_matricula, '%d/%m/%Y') AS "Data da Matrícula"
+FROM 
+    alunos a
+INNER JOIN 
+    matriculas m ON a.id_aluno = m.id_aluno
+INNER JOIN 
+    cursos c ON m.id_curso = c.id_curso;
+
+
 
