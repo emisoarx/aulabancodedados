@@ -1,0 +1,36 @@
+USE escola;
+
+CREATE TABLE Produtos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+qt_estoque INT NOT NULL
+);
+
+CREATE TABLE Pedidos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+qt_venda INT,
+data_venda DATETIME,
+produto_id INT,
+CONSTRAINT fk_produto FOREIGN KEY (produto_id) REFERENCES Produtos(id)
+);
+
+INSERT INTO Produtos (nome, qt_estoque)
+VALUES ('Coxinha',10);
+
+INSERT INTO Pedidos (qt_venda, data_venda, produto_id)
+VALUES (6, NOW(), 1);
+
+
+DELIMITER $$
+CREATE TRIGGER tg_atualiza_estoque AFTER INSERT ON Pedidos
+FOR EACH ROW
+BEGIN
+UPDATE Produtos 
+SET qt_estoque = qt_estoque-NEW.qt_venda
+WHERE id = NEW.produto_id;
+END $$
+DELIMITER;
+
+
+SELECT * FROM Produtos;
+
